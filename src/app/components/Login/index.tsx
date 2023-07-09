@@ -1,6 +1,36 @@
+"use client";
 import Image from "next/image";
+import { z } from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+const LoginSchema = z.object({
+  email: z.string().email("Digite um email valido"),
+  password: z
+    .string()
+    .nonempty("Campo obrigatorio")
+    .min(6, "A senha contém mais de 6 caracter"),
+});
+
+type LoginSchemaProps = z.infer<typeof LoginSchema>;
 
 export default function Login({ needLogo = false }: { needLogo: boolean }) {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<LoginSchemaProps>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit: SubmitHandler<LoginSchemaProps> = (data) => {
+    console.log(JSON.stringify(data, null, 2));
+    reset()
+  };
   return (
     <div className="h-full w-full">
       <div className="h-full w-full pt-28 pb-6">
@@ -15,7 +45,10 @@ export default function Login({ needLogo = false }: { needLogo: boolean }) {
                 width={250}
               />
             </div>
-            <form className="w-full flex justify-center">
+            <form
+              className="w-full flex justify-center"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div className="w-96 h-80 flex flex-col justify-center">
                 <div className="flex justify-evenly md:flex md:items-center mb-6">
                   <div>
@@ -28,11 +61,13 @@ export default function Login({ needLogo = false }: { needLogo: boolean }) {
                   </div>
                   <div>
                     <input
-                      type="password"
-                      id="password"
+                      type="text"
+                      id="email"
+                      {...register("email", { required: true })}
                       className="bg-blue-200 appearance-none border-2 border-blue-200 rounded w-full py-2 px-4 text-blue-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                       placeholder="Digite seu e-mail"
                     />
+                    <p>{errors && errors.email?.message}</p>
                   </div>
                 </div>
                 <div className="justify-evenly md:flex md:items-center mb-6">
@@ -47,9 +82,11 @@ export default function Login({ needLogo = false }: { needLogo: boolean }) {
                   <div>
                     <input
                       type="password"
+                      {...register("password", { required: true })}
                       className="bg-blue-200 appearance-none border-2 border-blue-200 rounded w-full py-2 px-4 text-blue-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                       id="password"
                     />
+                    <p>{errors && errors.password?.message}</p>
                   </div>
                 </div>
                 <div className="md:flex md:items-center mb-6 flex justify-end mr-6">
