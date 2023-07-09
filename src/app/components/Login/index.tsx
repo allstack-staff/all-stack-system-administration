@@ -28,8 +28,11 @@ export default function Login({ needLogo = false }: { needLogo: boolean }) {
   });
 
   const onSubmit: SubmitHandler<LoginSchemaProps> = (data) => {
-    console.log(JSON.stringify(data, null, 2));
-    reset()
+    alert(
+      "Adiciono a logica quando houver backend\n" +
+        JSON.stringify(data, null, 2)
+    );
+    reset();
   };
   return (
     <div className="h-full w-full">
