@@ -1,8 +1,9 @@
-import Layout from "../components/layout/page"
+import Layout from "../components/layout";
 
-export default function Dashboard({ content = <h1>Conteúdo aqui</h1> }) {
-    return (
-        <Layout>
-        </Layout>
-    )
+export default function Dashboard() {
+  return (
+    <Layout>
+      <h1>Conteudo aqui</h1>
+    </Layout>
+  );
 }

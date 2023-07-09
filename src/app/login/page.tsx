@@ -1,10 +1,13 @@
-import Layout from "../components/layout/page";
-import Login from "../components/Login/page";
+import Layout from "../components/layout";
+import Login from "../components/Login";
 
 export default function Home() {
-    return (
-        <Layout titleHeader="All Stack System Administration Login" onMainContent={false} >
-            <Login needLogo />
-        </Layout>
-);
+  return (
+    <Layout
+      titleHeader="All Stack System Administration Login"
+      onMainContent={false}
+    >
+      <Login needLogo />
+    </Layout>
+  );
 }

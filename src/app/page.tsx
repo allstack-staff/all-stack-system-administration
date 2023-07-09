@@ -1,4 +1,4 @@
-import PageMaintenance from "./components/pageMaintenance/page"
+import PageMaintenance from "./components/pageMaintenance"
 
 export default function Home() {
   return (
