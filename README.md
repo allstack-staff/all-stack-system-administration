@@ -5,7 +5,11 @@ O All Stack System Adminitration (ASSA) é uma aplicação de suporte a equipe d
 ## Endpoints
 
 /
+<br/>
 /login
+<br />
 /dashboard
+<br />
 /dashboard/request
+<br />
 /admin/newmember
